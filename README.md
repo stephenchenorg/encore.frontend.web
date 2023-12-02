@@ -1,6 +1,6 @@
 # Nuxt 3 Minimal Starter
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+說明文件：https://soft-beam-a34.notion.site/Encore-Web-Dcard-46f86172347046518e8d3c75861a5143?pvs=4
 
 ## Setup
 
