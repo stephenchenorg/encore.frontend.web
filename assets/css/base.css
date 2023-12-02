@@ -1,0 +1,10 @@
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+
+  body {
+    @apply selection:bg-black selection:text-white overflow-x-hidden;
+  }
+}

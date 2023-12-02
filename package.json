@@ -1,16 +1,30 @@
 {
-  "private": true,
   "type": "module",
+  "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "lint": "eslint .",
     "postinstall": "nuxt prepare"
   },
+  "dependencies": {},
   "devDependencies": {
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "@nuxtseo/module": "^2.0.0-beta.45",
+    "@pinia/nuxt": "^0.5.1",
+    "@tailwindcss/forms": "^0.5.7",
+    "@ycs77/eslint-config": "^1.0.5",
+    "eslint": "^8.55.0",
     "nuxt": "^3.8.2",
-    "vue": "^3.3.8",
+    "nuxt-headlessui": "^1.1.4",
+    "postcss": "^8.4.31",
+    "postcss-custom-properties": "^13.3.2",
+    "postcss-nesting": "^12.0.1",
+    "tailwindcss": "^3.3.5",
+    "typescript": "~5.2.0",
+    "vue": "^3.3.9",
     "vue-router": "^4.2.5"
   }
 }
