@@ -2,5 +2,6 @@
   <div>
     <NuxtLoadingIndicator />
     <NuxtPage />
+    <BackToTop />
   </div>
 </template>

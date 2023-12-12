@@ -5,6 +5,14 @@
   }
 
   body {
-    @apply selection:bg-black selection:text-white overflow-x-hidden;
+    @apply bg-neutral-50 font-light selection:bg-red-400 selection:text-white overflow-x-hidden;
+  }
+  body.overlay-show-menu,
+  body.overlay-show-categories-menu {
+    @apply !overflow-hidden;
+  }
+
+  button {
+    @apply focus:outline-none;
   }
 }

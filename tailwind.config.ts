@@ -17,11 +17,15 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['"Poppins"', ...fontFamily.sans],
+        sans: ['"Noto Sans TC"', ...fontFamily.sans],
       },
       spacing: {
         // eslint-disable-next-line style/quote-props
         '7.5': '1.875rem',
+      },
+      boxShadow: {
+        header: '0px 2px 4px 0px rgba(0, 0, 0, 0.06)',
+        card: '1px 1px 4px 0px rgba(0, 0, 0, 0.06)',
       },
     },
   },
