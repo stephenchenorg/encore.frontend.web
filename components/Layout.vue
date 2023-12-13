@@ -1,6 +1,6 @@
 <template>
-  <div class="pt-[70px] md:pt-0">
-    <header class="fixed top-0 inset-x-0 z-30 md:static">
+  <div class="pt-[70px] md:pt-[72px]">
+    <header class="fixed top-0 inset-x-0 z-30">
       <div class="h-[70px] md:h-[72px] flex items-center bg-white shadow-header">
         <div class="container flex justify-between items-center">
           <NuxtLink to="/" class="flex items-center w-[111px] h-10 shrink-0 md:w-[140.88px]">

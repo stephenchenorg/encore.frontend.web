@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <div class="container">
-      <div class="mb-4 md:my-8 grid grid-cols-1 md:grid-cols-[130px_auto_150px] lg:grid-cols-[200px_auto_308px] gap-4">
+      <div class="mb-4 md:my-8 grid grid-cols-1 md:grid-cols-[130px_auto_150px] lg:grid-cols-[200px_auto_240px] xl:grid-cols-[200px_auto_308px] gap-4">
         <nav class="md:order-1">
           <div class="relative z-20 -mx-4 md:hidden">
             <button
@@ -39,7 +39,7 @@
             </Fade>
           </div>
 
-          <ul class="hidden md:block md:sticky">
+          <ul class="hidden md:block md:sticky md:top-[calc(72px+32px)]">
             <li
               v-for="category in categories"
               :key="category.value"
@@ -59,7 +59,7 @@
         </nav>
 
         <div class="md:order-3">
-          <div class="md:sticky">
+          <div class="md:sticky md:top-[calc(72px+32px)]">
             <img class="rounded-lg" src="~/assets/example-images/encore-event-01.png">
           </div>
         </div>
