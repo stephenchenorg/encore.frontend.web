@@ -35,9 +35,16 @@
               關於安可
             </NuxtLink>
 
-            <a href="#" class="block px-4 py-1.5 md:px-6 md:py-2.5 bg-red-500 hover:bg-red-400 text-white font-normal whitespace-nowrap rounded-lg transition-colors">
-              Download
-            </a>
+            <div class="relative">
+              <a href="#" class="peer inline-block px-4 py-1.5 md:px-6 md:py-2.5 bg-red-500 hover:bg-red-400 text-white font-normal whitespace-nowrap rounded-lg transition-colors">
+                Download
+              </a>
+
+              <img
+                class="absolute left-1/2 z-30 max-w-none mt-[17px] md:mt-[14px] transform -translate-x-1/2 opacity-0 transition-opacity duration-300 select-none pointer-events-none peer-hover:opacity-100"
+                src="~/assets/images/qrcode-nav.png"
+              >
+            </div>
 
             <button
               type="button"

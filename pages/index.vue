@@ -143,14 +143,19 @@
             想再看更多內容嗎？
           </div>
 
-          <div class="mt-4 text-center">
+          <div class="mt-4 text-center relative">
             <button
               type="button"
-              class="inline-flex justify-center items-center gap-2 px-6 py-3 bg-red-500 hover:bg-red-400 text-white rounded-[25px] text-lg font-normal leading-[15px] transition-colors"
+              class="peer inline-flex justify-center items-center gap-2 px-6 py-3 bg-red-500 hover:bg-red-400 text-white rounded-[25px] text-lg font-normal leading-[15px] transition-colors"
             >
               <img class="w-[18px] h-[18px] relative" src="~/assets/images/communicate.svg">
               <div>請下載APP</div>
             </button>
+
+            <img
+              class="absolute bottom-full left-1/2 max-w-none transform -translate-x-1/2 opacity-0 transition-opacity duration-300 select-none pointer-events-none peer-hover:opacity-100"
+              src="~/assets/images/qrcode-bottom.png"
+            >
           </div>
         </main>
       </div>
