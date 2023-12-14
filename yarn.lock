@@ -4967,6 +4967,11 @@ hasown@^2.0.0:
   dependencies:
     function-bind "^1.1.2"
 
+hc-sticky@^2.2.7:
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/hc-sticky/-/hc-sticky-2.2.7.tgz#06f8f4f3bddc808e773f9bd420fa5268112bd014"
+  integrity sha512-xGEvtKqwztK3xC5a26U0ZNLu8bNMP378ZPuEfHRxHtQCsT/Y0Kg7BG3w02oWuD46ecOWUioUZoJAXT2tJs3Q7Q==
+
 hex-rgb@^4.1.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/hex-rgb/-/hex-rgb-4.3.0.tgz#af5e974e83bb2fefe44d55182b004ec818c07776"

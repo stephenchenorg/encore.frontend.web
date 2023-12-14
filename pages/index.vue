@@ -2,64 +2,66 @@
   <Layout>
     <div class="container">
       <div class="mb-4 md:my-8 grid grid-cols-1 md:grid-cols-[130px_auto_150px] lg:grid-cols-[200px_auto_240px] xl:grid-cols-[200px_auto_308px] gap-4">
-        <nav class="md:order-1">
-          <div class="relative z-20 -mx-4 md:hidden">
-            <button
-              type="button"
-              class="w-full flex justify-between items-center h-12 px-4 text-white"
-              :class="{
-                'bg-red-500': showCategoriesMenu,
-                'bg-zinc-800': !showCategoriesMenu,
-              }"
-              @click="showCategoriesMenu = !showCategoriesMenu"
-            >
-              <span class="text-lg font-medium">{{ selectedCategoryItem?.label }}</span>
-              <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
-                <path v-if="showCategoriesMenu" d="M4 12L10 6L16 12L4 12Z" fill="currentColor" />
-                <path v-else d="M16 8L10 14L4 8H16Z" fill="currentColor" />
-              </svg>
-            </button>
+        <div id="sidebar" class="md:order-1">
+          <nav id="sidebar-inner">
+            <div class="relative z-20 -mx-4 md:hidden">
+              <button
+                type="button"
+                class="w-full flex justify-between items-center h-12 px-4 text-white"
+                :class="{
+                  'bg-red-500': showCategoriesMenu,
+                  'bg-zinc-800': !showCategoriesMenu,
+                }"
+                @click="showCategoriesMenu = !showCategoriesMenu"
+              >
+                <span class="text-lg font-medium">{{ selectedCategoryItem?.label }}</span>
+                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
+                  <path v-if="showCategoriesMenu" d="M4 12L10 6L16 12L4 12Z" fill="currentColor" />
+                  <path v-else d="M16 8L10 14L4 8H16Z" fill="currentColor" />
+                </svg>
+              </button>
 
-            <Fade v-model="showCategoriesMenu">
-              <div class="absolute inset-x-0 grid grid-cols-3 bg-white">
+              <Fade v-model="showCategoriesMenu">
+                <div class="absolute inset-x-0 grid grid-cols-3 bg-white">
+                  <button
+                    v-for="category in filteredCategories"
+                    :key="category.value"
+                    type="button"
+                    class="
+                      w-full py-4 text-zinc-800 hover:text-red-500 font-normal tracking-tight
+                      border-r border-b border-zinc-100
+                      [&:nth-child(3n)]:border-r-0
+                      [&:nth-last-child(-n+3)]:border-b-0
+                    "
+                  >
+                    {{ category.label }}
+                  </button>
+                </div>
+              </Fade>
+            </div>
+
+            <ul class="hidden md:block md:pb-4">
+              <li
+                v-for="category in categories"
+                :key="category.value"
+              >
                 <button
-                  v-for="category in filteredCategories"
-                  :key="category.value"
                   type="button"
-                  class="
-                    w-full py-4 text-zinc-800 hover:text-red-500 font-normal tracking-tight
-                    border-r border-b border-zinc-100
-                    [&:nth-child(3n)]:border-r-0
-                    [&:nth-last-child(-n+3)]:border-b-0
-                  "
+                  class="w-full px-4 py-2 text-lg text-left font-medium"
+                  :class="{
+                    'bg-red-500 text-white': category.value === 'all',
+                    'text-zinc-800 hover:text-red-500': category.value !== 'all',
+                  }"
                 >
                   {{ category.label }}
                 </button>
-              </div>
-            </Fade>
-          </div>
+              </li>
+            </ul>
+          </nav>
+        </div>
 
-          <ul class="hidden md:block md:sticky md:top-[calc(72px+32px)]">
-            <li
-              v-for="category in categories"
-              :key="category.value"
-            >
-              <button
-                type="button"
-                class="w-full px-4 py-2 text-lg text-left font-medium"
-                :class="{
-                  'bg-red-500 text-white': category.value === 'all',
-                  'text-zinc-800 hover:text-red-500': category.value !== 'all',
-                }"
-              >
-                {{ category.label }}
-              </button>
-            </li>
-          </ul>
-        </nav>
-
-        <div class="md:order-3">
-          <div class="md:sticky md:top-[calc(72px+32px)]">
+        <div id="aside" class="md:order-3">
+          <div id="aside-inner" class="md:pb-4">
             <img class="rounded-lg" src="~/assets/example-images/encore-event-01.png">
           </div>
         </div>
@@ -207,6 +209,18 @@ const selectedCategoryItem = computed(() =>
 const filteredCategories = computed(() =>
   categories.filter(category => category.value !== selectedCategory.value)
 )
+
+useSticky({
+  target: '#sidebar > #sidebar-inner',
+  wrapper: '#sidebar',
+  offset: 32,
+})
+
+useSticky({
+  target: '#aside > #aside-inner',
+  wrapper: '#aside',
+  offset: 32,
+})
 
 const posts = Array.from({ length: 10 }).map((_, i) => ({
   id: i + 1,
