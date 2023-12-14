@@ -62,7 +62,9 @@
 
         <div id="aside" class="md:order-3">
           <div id="aside-inner" class="md:pb-4">
-            <img class="rounded-lg" src="~/assets/example-images/encore-event-01.png">
+            <button type="button" @click="openPostModal(2)">
+              <img class="rounded-lg" src="~/assets/example-images/encore-event-01.png">
+            </button>
           </div>
         </div>
 
@@ -83,11 +85,13 @@
                 <button
                   type="button"
                   class="group block w-full p-4 bg-white text-left rounded-lg shadow-card md:bg-transparent md:rounded-none md:shadow-none"
+                  @click="openPostModal(1)"
                 >
                   <img
                     class="aspect-[2/1] rounded-lg object-cover md:hidden"
                     :src="post.thumbnail"
                   >
+
                   <div class="hidden md:flex items-center">
                     <img
                       class="w-[43px] h-[43px] rounded-full mr-[17px]"
@@ -97,6 +101,7 @@
                       {{ post.author.name }}
                     </div>
                   </div>
+
                   <div class="mt-3 flex md:mt-4">
                     <div class="flex-1 min-w-0 mr-6">
                       <h5 class="text-zinc-800 group-hover:text-red-500 text-lg font-normal tracking-wide truncate transition-colors">
@@ -111,6 +116,7 @@
                       :src="post.thumbnail"
                     >
                   </div>
+
                   <div class="mt-2 flex items-center">
                     <div class="min-w-0 mr-1 flex items-center md:hidden">
                       <img
@@ -121,6 +127,7 @@
                         {{ post.author.name }}
                       </div>
                     </div>
+
                     <div class="flex items-center gap-x-8">
                       <div class="inline-flex justify-center items-center gap-2 bg-neutral-50 pl-3 pr-4 py-1 rounded-full border border-neutral-100">
                         <img class="w-[18px] h-[18px] relative" src="~/assets/images/like.svg">
@@ -164,6 +171,11 @@
     </div>
 
     <Overlay v-model="showCategoriesMenu" :z-index="20" />
+
+    <ModalPost
+      :id="postId"
+      v-model="showPostModal"
+    />
   </Layout>
 </template>
 
@@ -234,4 +246,12 @@ const posts = Array.from({ length: 10 }).map((_, i) => ({
   likes_count: 0,
   comments_count: 0,
 }))
+
+const showPostModal = ref(false)
+const postId = ref<number | undefined>(undefined)
+
+function openPostModal(id: number) {
+  postId.value = id
+  showPostModal.value = true
+}
 </script>

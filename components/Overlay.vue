@@ -2,6 +2,7 @@
   <Fade v-model="show">
     <div
       class="fixed inset-0 bg-black/70"
+      :class="overlayClass"
       :style="{ zIndex: zIndex - 1 }"
       @click="show = false"
     />
@@ -10,7 +11,8 @@
 
 <script setup lang="ts">
 withDefaults(defineProps<{
-  zIndex: number
+  zIndex?: number
+  overlayClass?: string
 }>(), {
   zIndex: 10,
 })

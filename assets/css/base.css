@@ -8,8 +8,9 @@
     @apply bg-neutral-50 font-light selection:bg-red-400 selection:text-white overflow-x-hidden;
   }
   body.overlay-show-menu,
-  body.overlay-show-categories-menu {
-    @apply !overflow-hidden;
+  body.overlay-show-categories-menu,
+  body.overlay-show-post-modal {
+    @apply !overflow-hidden md:!pr-[13px];
   }
 
   button {

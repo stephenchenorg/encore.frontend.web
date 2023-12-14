@@ -32,6 +32,7 @@ export default defineNuxtConfig({
     'nuxt-headlessui',
     '@nuxtseo/module',
     '@pinia/nuxt',
+    '@vueuse/nuxt',
   ],
   headlessui: {
     prefix: '',

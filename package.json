@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@vueuse/core": "^10.7.0",
     "hc-sticky": "^2.2.7",
     "vue": "^3.3.9",
     "vue-router": "^4.2.5"
@@ -20,6 +21,7 @@
     "@nuxtseo/module": "^2.0.0-beta.50",
     "@pinia/nuxt": "^0.5.1",
     "@tailwindcss/forms": "^0.5.7",
+    "@vueuse/nuxt": "^10.7.0",
     "@ycs77/eslint-config": "^1.0.5",
     "eslint": "^8.55.0",
     "nuxt": "^3.8.2",
