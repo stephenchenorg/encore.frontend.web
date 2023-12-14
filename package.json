@@ -9,11 +9,10 @@
     "lint": "eslint .",
     "postinstall": "nuxt prepare"
   },
-  "dependencies": {},
   "devDependencies": {
-    "@nuxt/devtools": "^1.0.0",
+    "@nuxt/devtools": "^1.0.6",
     "@nuxtjs/tailwindcss": "^6.8.0",
-    "@nuxtseo/module": "^2.0.0-beta.45",
+    "@nuxtseo/module": "^2.0.0-beta.50",
     "@pinia/nuxt": "^0.5.1",
     "@tailwindcss/forms": "^0.5.7",
     "@ycs77/eslint-config": "^1.0.5",
