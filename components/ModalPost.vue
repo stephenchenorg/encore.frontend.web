@@ -52,10 +52,10 @@
               {{ post.date }}
             </div>
 
-            <div class="md:grow md:min-h-0 md:overflow-y-auto">
+            <div class="mt-2 md:grow md:min-h-0 md:overflow-y-auto">
               <img
                 v-if="post.type === 'post'"
-                class="mt-2 mb-5 aspect-[2/1] rounded-lg object-cover"
+                class="mb-5 aspect-[2/1] rounded-lg object-cover"
                 :src="post.thumbnail"
               >
 
