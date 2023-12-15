@@ -2,7 +2,7 @@
   <div
     class="fixed right-[80px] bottom-[50px] transition-opacity duration-200 hidden md:block"
     :class="{
-      'opacity-70': show,
+      'opacity-70 hover:opacity-100': show,
       'opacity-0': !show,
     }"
   >
