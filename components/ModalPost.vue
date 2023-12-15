@@ -4,7 +4,7 @@
       <div class="w-full max-w-3xl h-full mx-auto bg-neutral-50 overflow-y-auto pointer-events-auto md:bg-transparent">
         <Header header-class="relative z-30 md:hidden" :z-index="30" />
 
-        <div class="sticky top-0 h-12 mb-4 bg-white flex justify-center items-center md:hidden">
+        <div class="sticky top-0 z-[1] h-12 mb-4 bg-white flex justify-center items-center md:hidden">
           <button
             type="button"
             class="absolute top-0 left-0 w-12 h-12"
