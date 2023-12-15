@@ -94,7 +94,7 @@
             </div>
 
             <div class="mt-4 flex justify-between items-center">
-              <div class="flex items-center gap-x-2">
+              <div class="flex items-center gap-x-2 flex-1 md:flex-none">
                 <div class="flex-1 md:flex-none inline-flex justify-center items-center gap-2 bg-neutral-50 px-6 py-2 md:py-3 rounded-full border border-neutral-100">
                   <img class="w-[18px] h-[18px] relative" src="~/assets/images/like.svg">
                   <span class="text-neutral-500 text-lg font-normal leading-[15px]">
