@@ -88,7 +88,7 @@
                   @click="openPostModal(1)"
                 >
                   <img
-                    class="aspect-[2/1] rounded-lg object-cover md:hidden"
+                    class="w-full aspect-[2/1] rounded-lg object-cover md:hidden"
                     :src="post.thumbnail"
                   >
 

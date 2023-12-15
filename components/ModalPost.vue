@@ -33,7 +33,7 @@
 
             <img
               v-if="post.type === 'event'"
-              class="mb-3 aspect-[2/1] rounded-lg object-cover"
+              class="mb-3 w-full aspect-[2/1] rounded-lg object-cover"
               :src="post.thumbnail"
             >
 
@@ -55,7 +55,7 @@
             <div class="mt-2 md:grow md:min-h-0 md:overflow-y-auto">
               <img
                 v-if="post.type === 'post'"
-                class="mb-5 aspect-[2/1] rounded-lg object-cover"
+                class="mb-5 w-full aspect-[2/1] rounded-lg object-cover"
                 :src="post.thumbnail"
               >
 
