@@ -43,7 +43,7 @@
 
             <div
               v-if="post.date"
-              class="text-neutral-400 font-normal"
+              class="mb-[25px] text-neutral-400 font-normal"
               :class="{
                 'mt-8': post.type === 'post',
                 'mt-2': post.type === 'event',
