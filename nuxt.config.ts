@@ -3,6 +3,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       baseApiURL: process.env.NUXT_PUBLIC_BASE_API_URL || 'https://localhost:8000',
+      encoreAboutURL: 'https://encoredays.com/tw/about-encore/',
+      encoreAppURL: 'https://encoredays.onelink.me/7mxD/MKTPDnav',
     },
   },
   site: {

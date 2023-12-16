@@ -109,13 +109,10 @@
                 </div>
               </div>
 
-              <button
-                type="button"
-                class="hidden md:inline-flex justify-center items-center gap-2 px-6 py-3 bg-red-500 hover:bg-red-400 text-white rounded-[25px] text-lg font-normal leading-[15px] transition-colors"
-              >
+              <EncoreDownloadLink class="hidden md:inline-flex justify-center items-center gap-2 px-6 py-3 bg-red-500 hover:bg-red-400 text-white rounded-[25px] text-lg font-normal leading-[15px] transition-colors select-none">
                 <img class="w-[18px] h-[18px] relative" src="~/assets/images/communicate.svg">
                 <div>下載APP</div>
-              </button>
+              </EncoreDownloadLink>
             </div>
           </template>
 
@@ -138,13 +135,10 @@
           </div>
         </div>
 
-        <button
-          type="button"
-          class="fixed inset-x-0 bottom-0 flex justify-center items-center gap-2 px-6 py-3 bg-red-500 hover:bg-red-400 text-white text-lg font-normal leading-[15px] transition-colors md:hidden"
-        >
+        <EncoreDownloadLink class="fixed inset-x-0 bottom-0 flex justify-center items-center gap-2 px-6 py-3 bg-red-500 hover:bg-red-400 text-white text-lg font-normal leading-[15px] transition-colors md:hidden">
           <img class="w-[18px] h-[18px] relative" src="~/assets/images/communicate.svg">
           <div>下載APP</div>
-        </button>
+        </EncoreDownloadLink>
       </div>
     </div>
   </div>

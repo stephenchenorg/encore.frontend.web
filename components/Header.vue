@@ -27,7 +27,7 @@
 
         <div class="flex items-center space-x-6 md:space-x-4">
           <NuxtLink
-            href="https://encoredays.com/tw/about-encore/"
+            :href="config.public.encoreAboutURL"
             class="hidden md:block px-6 py-2.5 text-zinc-800 hover:text-red-500 font-normal whitespace-nowrap transition-colors"
             target="_blank"
           >
@@ -35,12 +35,15 @@
           </NuxtLink>
 
           <div class="relative">
-            <a href="#" class="peer inline-block px-4 py-1.5 md:px-6 md:py-2.5 bg-red-500 hover:bg-red-400 text-white font-normal whitespace-nowrap rounded-lg transition-colors">
+            <EncoreDownloadLink
+              only-mobile
+              class="peer inline-block px-4 py-1.5 md:px-6 md:py-2.5 bg-red-500 hover:bg-red-400 text-white font-normal whitespace-nowrap rounded-lg transition-colors select-none"
+            >
               Download
-            </a>
+            </EncoreDownloadLink>
 
             <img
-              class="absolute left-1/2 z-30 max-w-none mt-[17px] md:mt-[14px] transform -translate-x-1/2 opacity-0 transition-opacity duration-300 select-none pointer-events-none peer-hover:opacity-100"
+              class="absolute left-1/2 z-30 max-w-none mt-[17px] md:mt-[14px] transform -translate-x-1/2 opacity-0 transition-opacity duration-300 select-none pointer-events-none md:peer-hover:opacity-100"
               src="~/assets/images/qrcode-nav.png"
             >
           </div>
@@ -68,7 +71,7 @@
     <Fade v-model="showMenu">
       <div class="absolute inset-x-0 px-4 pb-4 bg-white space-y-4 md:hidden">
         <NuxtLink
-          href="https://encoredays.com/tw/about-encore/"
+          :href="config.public.encoreAboutURL"
           class="block py-2 text-zinc-800 hover:text-red-500 font-normal tracking-tight transition-colors"
           target="_blank"
         >
@@ -104,6 +107,8 @@ withDefaults(defineProps<{
 }>(), {
   zIndex: 10,
 })
+
+const config = useRuntimeConfig()
 
 const showMenu = ref(false)
 
