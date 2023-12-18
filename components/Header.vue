@@ -11,9 +11,10 @@
 
         <form
           class="relative hidden md:block w-full max-w-[340px] mx-4"
-          @submit.prevent
+          @submit.prevent="submit"
         >
           <input
+            v-model="keyword"
             type="text"
             class="form-input w-full h-11 px-5 bg-neutral-50 rounded-[25px] border border-zinc-200 focus:border-red-500 focus:ring-red-500"
           >
@@ -80,9 +81,10 @@
 
         <form
           class="relative w-full"
-          @submit.prevent
+          @submit.prevent="submit"
         >
           <input
+            v-model="keyword"
             type="text"
             class="form-input w-full h-11 px-5 bg-neutral-50 rounded-[25px] border border-zinc-200 focus:border-red-500 focus:ring-red-500"
           >
@@ -109,8 +111,27 @@ withDefaults(defineProps<{
 })
 
 const config = useRuntimeConfig()
+const route = useRoute()
+const router = useRouter()
 
 const showMenu = ref(false)
+const keyword = ref(route.query.keyword as string || '')
+
+function submit() {
+  router.push({
+    path: '/',
+    query: {
+      keyword: keyword.value || undefined,
+      category: route.query.category as string || undefined,
+    },
+  })
+}
+
+watch(() => route.fullPath, () => {
+  keyword.value = route.query.keyword as string || ''
+  showMenu.value = false
+  window.scrollTo(0, 0)
+})
 
 watch(showMenu, showMenu => {
   if (showMenu) {

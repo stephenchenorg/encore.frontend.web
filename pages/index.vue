@@ -28,11 +28,12 @@
                     :key="category.value"
                     type="button"
                     class="
-                      w-full py-4 text-zinc-800 hover:text-red-500 font-normal tracking-tight
+                      w-full py-4 text-zinc-800 active:text-red-500 font-normal tracking-tight
                       border-r border-b border-zinc-100
                       [&:nth-child(3n)]:border-r-0
                       [&:nth-last-child(-n+3)]:border-b-0
                     "
+                    @click="selectCategory(category.value)"
                   >
                     {{ category.label }}
                   </button>
@@ -49,9 +50,10 @@
                   type="button"
                   class="w-full px-4 py-2 text-lg text-left font-medium"
                   :class="{
-                    'bg-red-500 text-white': category.value === 'all',
-                    'text-zinc-800 hover:text-red-500': category.value !== 'all',
+                    'bg-red-500 text-white': category.value === selectedCategory,
+                    'text-zinc-800 hover:text-red-500': category.value !== selectedCategory,
                   }"
+                  @click="selectCategory(category.value)"
                 >
                   {{ category.label }}
                 </button>
@@ -62,9 +64,9 @@
 
         <div id="aside" class="md:order-3">
           <div id="aside-inner" class="md:pb-4">
-            <button type="button" @click="openPostModal(2)">
-              <img class="rounded-lg" src="~/assets/example-images/encore-event-01.png">
-            </button>
+            <!-- <button type="button" @click="openPostModal('2')"> -->
+            <img class="rounded-lg" src="~/assets/example-images/encore-event-01.png">
+            <!-- </button> -->
           </div>
         </div>
 
@@ -81,24 +83,25 @@
                 md:[&>li:last-child]:after:content-none
               "
             >
-              <li v-for="post in posts" :key="post.id">
+              <li v-for="post in posts.data" :key="post.articleId">
                 <button
                   type="button"
                   class="group block w-full p-4 bg-white text-left rounded-lg shadow-card md:bg-transparent md:rounded-none md:shadow-none"
-                  @click="openPostModal(1)"
+                  @click="openPostModal(post.articleId)"
                 >
                   <img
+                    v-if="post.photos?.[0]"
                     class="w-full aspect-[2/1] rounded-lg object-cover md:hidden"
-                    :src="post.thumbnail"
+                    :src="post.photos[0]"
                   >
 
                   <div class="hidden md:flex items-center">
                     <img
                       class="w-[43px] h-[43px] rounded-full mr-[17px]"
-                      :src="post.author.avatar"
+                      :src="post.userPicture"
                     >
                     <div class="text-zinc-800 font-normal tracking-tight truncate">
-                      {{ post.author.name }}
+                      {{ post.userName }}
                     </div>
                   </div>
 
@@ -107,13 +110,17 @@
                       <h5 class="text-zinc-800 group-hover:text-red-500 text-lg font-normal tracking-wide truncate transition-colors">
                         {{ post.title }}
                       </h5>
-                      <p class="mt-1 text-neutral-500 text-[17px] font-normal tracking-wide line-clamp-2 md:mt-3.5 md:line-clamp-1">
-                        {{ post.description }}
+                      <p
+                        v-if="post.content"
+                        class="mt-1 text-neutral-500 text-[17px] font-normal tracking-wide md:mt-3.5"
+                      >
+                        {{ post.content }}
                       </p>
                     </div>
                     <img
-                      class="shrink-0 w-[82px] h-[82px] rounded-lg hidden md:block"
-                      :src="post.thumbnail"
+                      v-if="post.photos?.[0]"
+                      class="shrink-0 w-[82px] h-[82px] rounded-lg object-cover hidden md:block"
+                      :src="post.photos[0]"
                     >
                   </div>
 
@@ -121,10 +128,10 @@
                     <div class="min-w-0 mr-1 flex items-center md:hidden">
                       <img
                         class="w-[43px] h-[43px] rounded-full mr-[17px]"
-                        :src="post.author.avatar"
+                        :src="post.userPicture"
                       >
                       <div class="text-zinc-800 font-normal tracking-tight truncate">
-                        {{ post.author.name }}
+                        {{ post.userName }}
                       </div>
                     </div>
 
@@ -132,13 +139,15 @@
                       <div class="inline-flex justify-center items-center gap-2 bg-neutral-50 pl-3 pr-4 py-1 rounded-full border border-neutral-100">
                         <img class="w-[18px] h-[18px] relative" src="~/assets/images/like.svg">
                         <span class="text-neutral-500 text-[15px] font-normal leading-[15px]">
-                          {{ post.likes_count }}
+                          0
+                          <!-- {{ post.likes_count }} -->
                         </span>
                       </div>
                       <div class="inline-flex justify-center items-center gap-2 bg-neutral-50 pl-3 pr-4 py-1 rounded-full border border-neutral-100">
                         <img class="w-[18px] h-[18px] relative" src="~/assets/images/comment.svg">
                         <span class="text-neutral-500 text-[15px] font-normal leading-[15px]">
-                          {{ post.comments_count }}
+                          0
+                          <!-- {{ post.comments_count }} -->
                         </span>
                       </div>
                     </div>
@@ -180,18 +189,16 @@
 </template>
 
 <script setup lang="ts">
-import avatarPath from '~/assets/example-images/avatar-01.jpg'
-import postThumbnailPath from '~/assets/example-images/post-01.jpg'
+const route = useRoute()
+const router = useRouter()
 
 const showCategoriesMenu = ref(false)
+const selectedCategory = ref(route.query.category as string || 'all')
 
-watch(showCategoriesMenu, showCategoriesMenu => {
-  if (showCategoriesMenu) {
-    window.scrollTo(0, 0)
-    document.body.classList.add('overlay-show-categories-menu')
-  } else {
-    document.body.classList.remove('overlay-show-categories-menu')
-  }
+const posts = usePostsStore()
+await posts.fetch({
+  keyword: route.query.keyword as string || '',
+  category: selectedCategory.value,
 })
 
 const categories = [
@@ -213,7 +220,6 @@ const categories = [
   { label: '其他', value: 'others' },
 ]
 
-const selectedCategory = ref('all')
 const selectedCategoryItem = computed(() =>
   categories.find(category => category.value === selectedCategory.value)
 )
@@ -221,6 +227,9 @@ const selectedCategoryItem = computed(() =>
 const filteredCategories = computed(() =>
   categories.filter(category => category.value !== selectedCategory.value)
 )
+
+const showPostModal = ref(false)
+const postId = ref<string | undefined>(undefined)
 
 useSticky({
   target: '#sidebar > #sidebar-inner',
@@ -234,23 +243,40 @@ useSticky({
   offset: 32,
 })
 
-const posts = Array.from({ length: 10 }).map((_, i) => ({
-  id: i + 1,
-  title: '::綠綠調酒BAR——好事花生🥜:: #超商調酒',
-  description: '多虧了這次的 #全家品牌大使 任務，難得的嘗試了咖啡以外的私品茶新品項——— #花生圓圓醇奶 桂冠特別研發的 #花生鑽石小湯圓 ，以烘烤後的花生研磨成顆粒填入QQ彈彈的透明湯圓作為內餡，和經典軟糯的元宵湯圓全然不同的口感，搭上有少量蒸花生在其中但甜度比想像中來得低的豆漿牛奶甜湯，兩者的滋味相輔相成，也預留了些許空間再去做客製化的加料調整，不管是上班前提振精神，又或者下午茶放鬆，都很適合呢！♡♡♡',
-  thumbnail: postThumbnailPath,
-  author: {
-    name: 'slavetodrink_green 小酒鬼綠綠',
-    avatar: avatarPath,
-  },
-  likes_count: 0,
-  comments_count: 0,
-}))
+watch(showCategoriesMenu, showCategoriesMenu => {
+  if (showCategoriesMenu) {
+    window.scrollTo(0, 0)
+    document.body.classList.add('overlay-show-categories-menu')
+  } else {
+    document.body.classList.remove('overlay-show-categories-menu')
+  }
+})
 
-const showPostModal = ref(false)
-const postId = ref<number | undefined>(undefined)
+function selectCategory(category: string) {
+  selectedCategory.value = category && category !== 'all' ? category : 'all'
+  router.push({
+    path: '/',
+    query: {
+      keyword: route.query.keyword as string || undefined,
+      category: selectedCategory.value !== 'all' ? selectedCategory.value : undefined,
+    },
+  })
+}
 
-function openPostModal(id: number) {
+watch(() => route.fullPath, async () => {
+  selectedCategory.value = route.query.category as string || 'all'
+  showCategoriesMenu.value = false
+  showPostModal.value = false
+
+  await posts.fetch({
+    keyword: route.query.keyword as string || '',
+    category: selectedCategory.value,
+  })
+
+  window.scrollTo(0, 0)
+})
+
+function openPostModal(id: string) {
   postId.value = id
   showPostModal.value = true
 }
