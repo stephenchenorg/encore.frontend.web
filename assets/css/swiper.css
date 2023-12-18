@@ -1,0 +1,11 @@
+:root {
+  --swiper-theme-color: #ef4444 !important;
+}
+
+.swiper-slide img {
+  @apply select-none;
+}
+
+.swiper-pagination-bullet {
+  @apply ring-2 ring-white;
+}
