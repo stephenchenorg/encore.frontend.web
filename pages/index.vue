@@ -72,6 +72,17 @@
 
         <main class="min-w-0 md:order-2">
           <div class="md:p-8 md:bg-white md:rounded-lg md:shadow-card">
+            <div
+              v-if="posts.hasResult && route.query.keyword"
+              class="mb-4 text-red-500 font-normal"
+            >
+              符合關鍵字“{{ route.query.keyword }}”的文章共 {{ Math.min(10, posts.data.length) }} 筆
+            </div>
+
+            <div v-if="!posts.hasResult" class="text-red-500 font-normal">
+              找不到相關內容
+            </div>
+
             <ul
               class="
                 space-y-4

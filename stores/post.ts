@@ -3,6 +3,7 @@ import type { Post } from '~/types/post'
 
 export const usePostsStore = defineStore('posts', () => {
   const data = ref([]) as Ref<Post[]>
+  const hasResult = ref(false)
 
   async function fetch(params: {
     category?: string
@@ -31,10 +32,14 @@ export const usePostsStore = defineStore('posts', () => {
 
           return { ...post, title, content }
         })
+
+      hasResult.value = true
+    } else {
+      hasResult.value = false
     }
   }
 
-  return { fetch, data }
+  return { fetch, data, hasResult }
 })
 
 export const usePostStore = defineStore('post', () => {
