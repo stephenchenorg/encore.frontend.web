@@ -9,7 +9,7 @@
     <div class="container flex justify-end">
       <button
         type="button"
-        class="flex justify-center items-center w-11 h-11 bg-red-500 rounded-lg pointer-events-auto"
+        class="flex justify-center items-center w-11 h-11 bg-red-400 rounded-lg pointer-events-auto"
         @click="onClick"
       >
         <svg class="w-5 h-5" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

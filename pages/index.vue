@@ -9,7 +9,7 @@
                 type="button"
                 class="w-full flex justify-between items-center h-12 px-4 text-white"
                 :class="{
-                  'bg-red-500': showCategoriesMenu,
+                  'bg-red-400': showCategoriesMenu,
                   'bg-zinc-800': !showCategoriesMenu,
                 }"
                 @click="showCategoriesMenu = !showCategoriesMenu"
@@ -28,7 +28,7 @@
                     :key="category.value"
                     type="button"
                     class="
-                      w-full py-4 text-zinc-800 active:text-red-500 font-normal tracking-tight
+                      w-full py-4 text-zinc-800 active:text-red-400 font-normal tracking-tight
                       border-r border-b border-zinc-100
                       [&:nth-child(3n)]:border-r-0
                       [&:nth-last-child(-n+3)]:border-b-0
@@ -50,8 +50,8 @@
                   type="button"
                   class="w-full px-4 py-2 text-lg text-left font-medium"
                   :class="{
-                    'bg-red-500 text-white': category.value === selectedCategory,
-                    'text-zinc-800 hover:text-red-500': category.value !== selectedCategory,
+                    'bg-red-400 text-white': category.value === selectedCategory,
+                    'text-zinc-800 hover:text-red-400': category.value !== selectedCategory,
                   }"
                   @click="selectCategory(category.value)"
                 >
@@ -74,12 +74,12 @@
           <div class="md:p-8 md:bg-white md:rounded-lg md:shadow-card">
             <div
               v-if="posts.hasResult && route.query.keyword"
-              class="mb-4 text-red-500 font-normal"
+              class="mb-4 text-red-400 font-normal"
             >
               符合關鍵字“{{ route.query.keyword }}”的文章共 {{ Math.min(10, posts.data.length) }} 筆
             </div>
 
-            <div v-if="!posts.hasResult" class="text-red-500 font-normal">
+            <div v-if="!posts.hasResult" class="text-red-400 font-normal">
               找不到相關內容
             </div>
 
@@ -122,7 +122,7 @@
 
                   <div class="mt-3 flex md:mt-4">
                     <div class="flex-1 min-w-0 mr-6">
-                      <h5 class="text-zinc-800 group-hover:text-red-500 text-lg font-normal tracking-wide truncate transition-colors">
+                      <h5 class="text-zinc-800 group-hover:text-red-400 text-lg font-normal tracking-wide truncate transition-colors">
                         {{ post.title }}
                       </h5>
                       <p
@@ -183,7 +183,7 @@
           <div class="mt-4 text-center relative">
             <EncoreDownloadLink
               only-mobile
-              class="peer inline-flex justify-center items-center gap-2 px-6 py-3 bg-red-500 hover:bg-red-400 text-white rounded-[25px] text-lg font-normal leading-[15px] transition-colors select-none"
+              class="peer inline-flex justify-center items-center gap-2 px-6 py-3 bg-red-400 hover:bg-red-500 text-white rounded-[25px] text-lg font-normal leading-[15px] transition-colors select-none"
             >
               <img class="w-[18px] h-[18px] relative" src="~/assets/images/communicate.svg">
               <div>請下載APP</div>

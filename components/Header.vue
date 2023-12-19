@@ -16,7 +16,7 @@
           <input
             v-model="keyword"
             type="text"
-            class="form-input w-full h-11 px-5 bg-neutral-50 rounded-[25px] border border-zinc-200 focus:border-red-500 focus:ring-red-500"
+            class="form-input w-full h-11 px-5 bg-neutral-50 rounded-[25px] border border-zinc-200 focus:border-red-400 focus:ring-red-400"
           >
           <button type="submit" class="absolute top-[9px] right-4">
             <img
@@ -29,7 +29,7 @@
         <div class="flex items-center space-x-6 md:space-x-4">
           <NuxtLink
             :href="config.public.encoreAboutURL"
-            class="hidden md:block px-6 py-2.5 text-zinc-800 hover:text-red-500 font-normal whitespace-nowrap transition-colors"
+            class="hidden md:block px-6 py-2.5 text-zinc-800 hover:text-red-400 font-normal whitespace-nowrap transition-colors"
             target="_blank"
           >
             關於安可
@@ -38,7 +38,7 @@
           <div class="relative">
             <EncoreDownloadLink
               only-mobile
-              class="peer inline-block px-4 py-1.5 md:px-6 md:py-2.5 bg-red-500 hover:bg-red-400 text-white font-normal whitespace-nowrap rounded-lg transition-colors select-none"
+              class="peer inline-block px-4 py-1.5 md:px-6 md:py-2.5 bg-red-400 hover:bg-red-500 text-white font-normal whitespace-nowrap rounded-lg transition-colors select-none"
             >
               Download
             </EncoreDownloadLink>
@@ -73,7 +73,7 @@
       <div class="absolute inset-x-0 px-4 pb-4 bg-white space-y-4 md:hidden">
         <NuxtLink
           :href="config.public.encoreAboutURL"
-          class="block py-2 text-zinc-800 hover:text-red-500 font-normal tracking-tight transition-colors"
+          class="block py-2 text-zinc-800 hover:text-red-400 font-normal tracking-tight transition-colors"
           target="_blank"
         >
           關於安可
@@ -86,7 +86,7 @@
           <input
             v-model="keyword"
             type="text"
-            class="form-input w-full h-11 px-5 bg-neutral-50 rounded-[25px] border border-zinc-200 focus:border-red-500 focus:ring-red-500"
+            class="form-input w-full h-11 px-5 bg-neutral-50 rounded-[25px] border border-zinc-200 focus:border-red-400 focus:ring-red-400"
           >
           <button type="submit" class="absolute top-[9px] right-3">
             <img
