@@ -265,7 +265,6 @@ function selectCategory(category: string) {
   router.push({
     path: '/',
     query: {
-      keyword: route.query.keyword as string || undefined,
       category: selectedCategory.value !== 'all' ? selectedCategory.value : undefined,
     },
   })

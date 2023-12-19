@@ -122,7 +122,6 @@ function submit() {
     path: '/',
     query: {
       keyword: keyword.value || undefined,
-      category: route.query.category as string || undefined,
     },
   })
 }
