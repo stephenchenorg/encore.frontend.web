@@ -158,15 +158,13 @@
                       <div class="inline-flex justify-center items-center gap-2 bg-neutral-50 pl-3 pr-4 py-1 rounded-full border border-neutral-100">
                         <img class="w-[18px] h-[18px] relative" src="~/assets/images/like.svg">
                         <span class="text-neutral-500 text-[15px] font-normal leading-[15px]">
-                          0
-                          <!-- {{ post.likes_count }} -->
+                          {{ post.likeCount ?? 0 }}
                         </span>
                       </div>
                       <div class="inline-flex justify-center items-center gap-2 bg-neutral-50 pl-3 pr-4 py-1 rounded-full border border-neutral-100">
                         <img class="w-[18px] h-[18px] relative" src="~/assets/images/comment.svg">
                         <span class="text-neutral-500 text-[15px] font-normal leading-[15px]">
-                          0
-                          <!-- {{ post.comments_count }} -->
+                          {{ post.commentCount ?? 0 }}
                         </span>
                       </div>
                     </div>

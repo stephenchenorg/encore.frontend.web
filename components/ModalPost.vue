@@ -124,15 +124,13 @@
                 <div class="flex-1 md:flex-none inline-flex justify-center items-center gap-2 bg-neutral-50 px-6 py-2 md:py-3 rounded-full border border-neutral-100">
                   <img class="w-[18px] h-[18px] relative" src="~/assets/images/like.svg">
                   <span class="text-neutral-500 text-lg font-normal leading-[15px]">
-                    0
-                    <!-- {{ post.likes_count }} -->
+                    {{ post.data.likeCount ?? 0 }}
                   </span>
                 </div>
                 <div class="flex-1 md:flex-none inline-flex justify-center items-center gap-2 bg-neutral-50 px-6 py-2 md:py-3 rounded-full border border-neutral-100">
                   <img class="w-[18px] h-[18px] relative" src="~/assets/images/comment.svg">
                   <span class="text-neutral-500 text-lg font-normal leading-[15px]">
-                    0
-                    <!-- {{ post.comments_count }} -->
+                    {{ post.data.commentCount ?? 0 }}
                   </span>
                 </div>
               </div>
