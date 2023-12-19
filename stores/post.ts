@@ -19,15 +19,19 @@ export const usePostsStore = defineStore('posts', () => {
       method: 'GET',
     })
 
-    data.value = (res.value?.data ?? [])
-      .slice(0, 10)
-      .map(post => {
-        let { title, content } = extractPostTitleFromContent(post.content)
+    const result = res.value?.data ?? []
 
-        content = contentExcerpt(content)
+    if (result.length > 0) {
+      data.value = result
+        .slice(0, 10)
+        .map(post => {
+          let { title, content } = extractPostTitleFromContent(post.content)
 
-        return { ...post, title, content }
-      })
+          content = contentExcerpt(content)
+
+          return { ...post, title, content }
+        })
+    }
   }
 
   return { fetch, data }
