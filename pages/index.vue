@@ -97,10 +97,14 @@
 
                   <div class="hidden md:flex items-center">
                     <img
+                      v-if="post.userPicture"
                       class="w-[43px] h-[43px] rounded-full mr-[17px]"
                       :src="post.userPicture"
                     >
-                    <div class="text-zinc-800 font-normal tracking-tight truncate">
+                    <div
+                      v-if="post.userName"
+                      class="text-zinc-800 font-normal tracking-tight truncate"
+                    >
                       {{ post.userName }}
                     </div>
                   </div>
@@ -127,10 +131,14 @@
                   <div class="mt-2 flex items-center">
                     <div class="min-w-0 mr-1 flex items-center md:hidden">
                       <img
+                        v-if="post.userPicture"
                         class="w-[43px] h-[43px] rounded-full mr-[17px]"
                         :src="post.userPicture"
                       >
-                      <div class="text-zinc-800 font-normal tracking-tight truncate">
+                      <div
+                        v-if="post.userName"
+                        class="text-zinc-800 font-normal tracking-tight truncate"
+                      >
                         {{ post.userName }}
                       </div>
                     </div>

@@ -23,10 +23,14 @@
           <template v-if="!loading && post.data">
             <div class="flex items-center mb-6">
               <img
+                v-if="post.data.userPicture"
                 class="w-[43px] h-[43px] rounded-full mr-[17px]"
                 :src="post.data.userPicture"
               >
-              <div class="text-zinc-800 font-normal tracking-tight truncate">
+              <div
+                v-if="post.data.userName"
+                class="text-zinc-800 font-normal tracking-tight truncate"
+              >
                 {{ post.data.userName }}
               </div>
             </div>
