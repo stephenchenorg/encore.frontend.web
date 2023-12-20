@@ -49,7 +49,7 @@
                     >
                       <img
                         class="w-full aspect-[2/1] rounded-lg object-cover"
-                        :src="photo"
+                        src="~/assets/example-images/encore-event-01.png"
                       >
                     </div>
                   </div>
