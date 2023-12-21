@@ -14,7 +14,7 @@ export const usePostsStore = defineStore('posts', () => {
       keyword = '',
     } = params
 
-    const apiPath = `/public/encoreContents?page=1&group=${category !== 'all' ? category : ''}&orderBy=like&queryType=all&queryString=${keyword}&hashTags=&lang=zh-tw`
+    const apiPath = `/public/encoreContents?page=1&group=${category !== 'all' ? category : ''}&orderBy=createTime&queryType=all&queryString=${keyword}&hashTags=&lang=zh-tw`
 
     const { data: res } = await useApiFetch<ApiResponse<Post[]>>(apiPath, {
       method: 'GET',
