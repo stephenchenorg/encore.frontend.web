@@ -76,7 +76,7 @@
 							<div class="flex-1 md:flex-none inline-flex items-center gap-2 my-1 w-full">
                 <img class="w-[18px] h-[18px] relative" src="~/assets/images/local-two.svg">
                 <div class="text-neutral-400 font-normal text-[17px]/[31px]">
-                  {{ activity.type }}
+                  {{ activity.location }}
                 </div>
               </div>
 
@@ -243,7 +243,7 @@ const activity: Activity = {
   startDate: "2023年09月15日 11:00",
   endDate: "2023年10月15日 23:00",
   chargingMethod: "免費",
-  type: "線上活動",
+  location: "線上活動",
   applicants: 15,
   content: "<p>安可日子長期推動「再現價值」的理念，希望鼓勵平台創作者記錄生活、讓生命的每一天充滿意義。</p><p>今年首次展開年度盛事「2023Encore創作者盛會：大人的安可日子」晉創作者頒獎典禮，以創作主題「大人的四季」展開年度徵件，希望募集創作者們的大人哲學。</p><p>我們認為人生如四季般精彩，每個人的春夏秋冬皆有不同故事與體悟，由這些日子織成大人的模樣，唯有感受過、領略過，並且記錄下來，才能證明我們真切地活過。&nbsp;</p><p>｜徵件時間｜</p><p>2023/9/15-2023/10/15</p><p>｜獎項｜</p><p>1.年度最佳創作獎&nbsp;</p><p>2.文青故事創作獎</p><p>3.最佳攝影創作獎</p><p>4.潛力新星創作獎</p><p>5.最佳創作能量獎</p><p>6.徵稿超新星獎</p><p>7.創作領導力獎</p><p>獎項詳情請詳閱活動官網&nbsp;</p><p>主辦方安可日子股份有限公司擁有活動最終解釋權</p>",
   commentCount: 0,
