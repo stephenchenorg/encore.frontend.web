@@ -22,21 +22,17 @@ export const usePostsStore = defineStore('posts', () => {
 
     const result = res.value?.data ?? []
 
-    if (result.length > 0) {
-      data.value = result
-        .slice(0, 10)
-        .map(post => {
-          let { title, content } = extractPostTitleFromContent(post.content)
+    data.value = result
+      .slice(0, 10)
+      .map(post => {
+        let { title, content } = extractPostTitleFromContent(post.content)
 
-          content = contentExcerpt(content)
+        content = contentExcerpt(content)
 
-          return { ...post, title, content }
-        })
+        return { ...post, title, content }
+      })
 
-      hasResult.value = true
-    } else {
-      hasResult.value = false
-    }
+    hasResult.value = result.length > 0
   }
 
   return { fetch, data, hasResult }
