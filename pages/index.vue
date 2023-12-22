@@ -64,9 +64,9 @@
 
         <div id="aside" class="md:order-3">
           <div id="aside-inner" class="md:pb-4">
-             <button type="button" @click="openActivityModal('ObjectId(612b553bad8487487ba24beb)')">
-            <img class="rounded-lg" src="~/assets/example-images/encore-event-01.png">
-             </button>
+            <button type="button" @click="openActivityModal('ObjectId(612b553bad8487487ba24beb)')">
+              <img class="rounded-lg" src="~/assets/example-images/encore-event-01.png">
+            </button>
           </div>
         </div>
 

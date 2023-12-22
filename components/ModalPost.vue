@@ -179,9 +179,6 @@ import { Pagination } from 'swiper/modules'
 import mediumZoom, { type Zoom } from 'medium-zoom'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import avatarPath from '~/assets/example-images/avatar-01.jpg'
-import post1ThumbnailPath from '~/assets/example-images/post-01.jpg'
-import post2ThumbnailPath from '~/assets/example-images/encore-event-01.png'
 
 const props = defineProps<{
   id: string | undefined
