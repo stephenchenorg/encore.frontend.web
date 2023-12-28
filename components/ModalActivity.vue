@@ -20,30 +20,30 @@
         </div>
 
         <div class="relative bg-white px-4 py-6 md:px-12 md:pt-12 md:pb-4 shadow-card md:h-full md:flex md:flex-col">
-          <template v-if="!loading && post.data">
+          <template v-if="!loading && event.data">
             <div class="flex items-center mb-6">
               <img
-                v-if="post.data.userPicture"
+                v-if="event.data.userPicture"
                 class="w-[43px] h-[43px] rounded-full mr-[17px]"
-                :src="activity.activityPicture"
+                :src="event.data.userPicture"
               >
               <div
-                v-if="post.data.userName"
+                v-if="event.data.userName"
                 class="text-zinc-800 font-normal tracking-tight truncate"
               >
-                {{ activity.activityName }}
+                {{ event.data.userName }}
               </div>
             </div>
 
             <div class="mt-2 md:grow md:min-h-0 md:overflow-y-auto">
               <div
-                v-if="post.data.photos && post.data.photos.length"
+                v-if="event.data.photos && event.data.photos.length"
                 class="mb-5 relative"
               >
                 <div ref="swiperEl" class="swiper">
                   <div class="swiper-wrapper">
                     <div
-                      v-for="photo in post.data.photos"
+                      v-for="photo in event.data.photos"
                       :key="photo"
                       class="swiper-slide"
                     >
@@ -62,42 +62,41 @@
               </div> -->
 
               <h5 class="text-zinc-800 text-[28px]/[42px] font-normal tracking-wide transition-colors">
-                {{ activity.title }}
+                {{ event.data.name }}
               </h5>
 
               <div class="flex-1 md:flex-none inline-flex items-center gap-2 my-1 w-full">
                 <img class="w-[18px] h-[18px] relative" src="~/assets/images/calendar-three.svg">
                 <div class="text-neutral-400 font-normal text-[17px]/[31px]">
-                  <!-- {{ dayjs(post.data.createdAt).format('MM 月 DD 日 HH:mm') }} -->
-                  {{ activity.startDate }} - {{ activity.endDate }}
+                  {{ dayjs(event.data.startDate).format('YYYY年MM月DD日') }} {{ event.data.startTime }} - {{ dayjs(event.data.endData).format('YYYY年MM月DD日') }} {{ event.data.endTime }}
                 </div>
               </div>
 
               <div class="flex-1 md:flex-none inline-flex items-center gap-2 my-1 w-full">
                 <img class="w-[18px] h-[18px] relative" src="~/assets/images/local-two.svg">
                 <div class="text-neutral-400 font-normal text-[17px]/[31px]">
-                  {{ activity.location }}
+                  {{ event.data.address }}
                 </div>
               </div>
 
               <div class="flex-1 md:flex-none inline-flex items-center gap-2 my-1 w-full">
                 <img class="w-[18px] h-[18px] relative" src="~/assets/images/dollar.svg">
                 <div class="text-neutral-400 font-normal text-[17px]/[31px]">
-                  {{ activity.chargingMethod }}
+                  {{ event.data.isFree ? '免費' : '收費' }}
                 </div>
               </div>
 
               <div class="flex-1 md:flex-none inline-flex items-center gap-2 my-1 w-full">
                 <img class="w-[18px] h-[18px] relative" src="~/assets/images/peoples.svg">
                 <div class="text-neutral-400 font-normal text-[17px]/[31px]">
-                  已經有 {{ activity.applicants }} 個人報名
+                  已經有 {{ event.applicants }} 個人報名
                 </div>
               </div>
 
               <div
-                v-if="activity.content"
+                v-if="event.data.info"
                 class="mt-2 text-neutral-500 text-[17px]/[31px] font-normal tracking-wide break-all"
-                v-html="activity.content.replaceAll('\n', '<br>')"
+                v-html="event.data.info.replaceAll('\n', '<br>')"
               />
             </div>
 
@@ -106,13 +105,13 @@
                 <div class="flex-1 md:flex-none inline-flex justify-center items-center gap-2 bg-neutral-50 px-6 py-2 md:py-3 rounded-full border border-neutral-100">
                   <img class="w-[18px] h-[18px] relative" src="~/assets/images/like.svg">
                   <span class="text-neutral-500 text-lg font-normal leading-[15px]">
-                    {{ activity.likeCount }}
+                    {{ event.data.likeCount }}
                   </span>
                 </div>
                 <div class="flex-1 md:flex-none inline-flex justify-center items-center gap-2 bg-neutral-50 px-6 py-2 md:py-3 rounded-full border border-neutral-100">
                   <img class="w-[18px] h-[18px] relative" src="~/assets/images/comment.svg">
                   <span class="text-neutral-500 text-lg font-normal leading-[15px]">
-                    {{ activity.commentCount }}
+                    {{ event.data.commentCount }}
                   </span>
                 </div>
               </div>
@@ -160,13 +159,13 @@ import { Pagination } from 'swiper/modules'
 import mediumZoom, { type Zoom } from 'medium-zoom'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import type { Activity } from '~/types/activity'
+import dayjs from "dayjs";
 
 const props = defineProps<{
   id: string | undefined
 }>()
 
-const post = usePostStore()
+const event = useEventStore()
 
 const show = defineModel<boolean>({ required: true })
 
@@ -186,7 +185,7 @@ watch(show, async (_value, _oldValue, onCleanup) => {
   if (props.id) {
     loading.value = true
     try {
-      await post.fetch(props.id)
+      await event.fetch(props.id)
     } catch (error) {
       loading.value = false
       throw error
@@ -224,25 +223,5 @@ watch(show, async (_value, _oldValue, onCleanup) => {
 
 function close() {
   show.value = false
-}
-
-const activity: Activity = {
-  activityId: '1',
-  activityName: '官方賬號',
-  activityPicture: 'https://encoredays.com/wp-content/uploads/2022/10/cropped-Encore_Logo_3-1-150x150.png',
-  photos: [
-    'https://example.com/photo1.jpg',
-    'https://example.com/photo2.jpg',
-    'https://example.com/photo3.jpg',
-  ],
-  title: 'Encore年度徵件活動：大人的四季｜最高獎金高達$6000',
-  startDate: '2023年09月15日 11:00',
-  endDate: '2023年10月15日 23:00',
-  chargingMethod: '免費',
-  location: '線上活動',
-  applicants: 15,
-  content: '<p>安可日子長期推動「再現價值」的理念，希望鼓勵平台創作者記錄生活、讓生命的每一天充滿意義。</p><p>今年首次展開年度盛事「2023Encore創作者盛會：大人的安可日子」晉創作者頒獎典禮，以創作主題「大人的四季」展開年度徵件，希望募集創作者們的大人哲學。</p><p>我們認為人生如四季般精彩，每個人的春夏秋冬皆有不同故事與體悟，由這些日子織成大人的模樣，唯有感受過、領略過，並且記錄下來，才能證明我們真切地活過。&nbsp;</p><p>｜徵件時間｜</p><p>2023/9/15-2023/10/15</p><p>｜獎項｜</p><p>1.年度最佳創作獎&nbsp;</p><p>2.文青故事創作獎</p><p>3.最佳攝影創作獎</p><p>4.潛力新星創作獎</p><p>5.最佳創作能量獎</p><p>6.徵稿超新星獎</p><p>7.創作領導力獎</p><p>獎項詳情請詳閱活動官網&nbsp;</p><p>主辦方安可日子股份有限公司擁有活動最終解釋權</p>',
-  commentCount: 0,
-  likeCount: 22,
 }
 </script>

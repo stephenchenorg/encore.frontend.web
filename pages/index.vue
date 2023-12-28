@@ -64,7 +64,10 @@
 
         <div id="aside" class="md:order-3">
           <div id="aside-inner" class="md:pb-4">
-            <button type="button" @click="openActivityModal('ObjectId(612b553bad8487487ba24beb)')">
+            <button type="button"
+                    v-for="event in events.data"
+                    :key="event.eventId"
+                    @click="openActivityModal(event.eventId)">
               <img class="rounded-lg" src="~/assets/example-images/encore-event-01.png">
             </button>
           </div>
@@ -222,6 +225,9 @@ await posts.fetch({
   keyword: route.query.keyword as string || '',
   category: selectedCategory.value,
 })
+
+const events = useEventsStore()
+await events.fetch()
 
 const categories = [
   { label: '全部貼文', value: 'all' },
