@@ -37,19 +37,17 @@
 
             <div class="mt-2 md:grow md:min-h-0 md:overflow-y-auto">
               <div
-                v-if="event.data.photos && event.data.photos.length"
+                v-if="event.data.image"
                 class="mb-5 relative"
               >
                 <div ref="swiperEl" class="swiper">
                   <div class="swiper-wrapper">
                     <div
-                      v-for="photo in event.data.photos"
-                      :key="photo"
                       class="swiper-slide"
                     >
                       <img
                         class="w-full aspect-[2/1] rounded-lg object-cover"
-                        src="~/assets/example-images/encore-event-01.png"
+                        :src="event.data.image"
                       >
                     </div>
                   </div>
@@ -89,7 +87,7 @@
               <div class="flex-1 md:flex-none inline-flex items-center gap-2 my-1 w-full">
                 <img class="w-[18px] h-[18px] relative" src="~/assets/images/peoples.svg">
                 <div class="text-neutral-400 font-normal text-[17px]/[31px]">
-                  已經有 {{ event.applicants }} 個人報名
+                  已經有 {{ event.participants ?? 0 }} 個人報名
                 </div>
               </div>
 

@@ -68,7 +68,7 @@
                     v-for="event in events.data"
                     :key="event.eventId"
                     @click="openActivityModal(event.eventId)">
-              <img class="rounded-lg" src="~/assets/example-images/encore-event-01.png">
+              <img class="rounded-lg" :src="event.image">
             </button>
           </div>
         </div>

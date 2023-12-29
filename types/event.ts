@@ -16,5 +16,7 @@ export interface Event {
   endTime: string
   isFree: boolean,
   isOnline: boolean,
-  createdAt: string
+  image: string,
+  participants: number,
+  createdAt: string,
 }
