@@ -32,7 +32,7 @@ FROM base
 ENV PORT=$PORT
 
 # copy only the files needed to run the app
-COPY --from=build /app .
+COPY --from=build /app/.output /app/.output
 
 CMD [ "node", ".output/server/index.mjs" ]
 
