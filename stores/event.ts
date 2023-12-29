@@ -6,7 +6,6 @@ export const useEventsStore = defineStore('activities', () => {
   const hasResult = ref(false)
 
   async function fetch() {
-
     const apiPath = `/public/eventContents?page=1`
 
     const { data: res } = await useApiFetch<ApiResponse<Event[]>>(apiPath, {

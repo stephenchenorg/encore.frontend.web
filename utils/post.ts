@@ -12,7 +12,7 @@ export function extractPostTitleFromContent(originalContent: string) {
   const firstSection = sections[0]
 
   if (allBreakCharacters.some(symbol => firstSection.includes(symbol)) &&
-      !dontBreakCharacters.some(symbol => firstSection.includes(symbol))
+    !dontBreakCharacters.some(symbol => firstSection.includes(symbol))
   ) {
     // 如果有標點符號，就把標點符號前面的當作標題
     title = firstSection.match(new RegExp(`.+?[${allBreakCharacters.join('')}]`))?.[0] ?? ''

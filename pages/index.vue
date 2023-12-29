@@ -64,10 +64,12 @@
 
         <div id="aside" class="md:order-3">
           <div id="aside-inner" class="md:pb-4">
-            <button type="button"
-                    v-for="event in events.data"
-                    :key="event.eventId"
-                    @click="openActivityModal(event.eventId)">
+            <button
+              v-for="event in events.data"
+              :key="event.eventId"
+              type="button"
+              @click="openActivityModal(event.eventId)"
+            >
               <img class="rounded-lg" :src="event.image">
             </button>
           </div>

@@ -13,7 +13,7 @@ const config = useRuntimeConfig()
 
 function onClick() {
   if ((props.onlyMobile && window.matchMedia('(max-width: 767px)').matches) ||
-      !props.onlyMobile
+    !props.onlyMobile
   ) {
     window.open(config.public.encoreAppURL, '_blank')
   }

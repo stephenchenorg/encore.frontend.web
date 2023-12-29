@@ -157,7 +157,7 @@ import { Pagination } from 'swiper/modules'
 import mediumZoom, { type Zoom } from 'medium-zoom'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import dayjs from "dayjs";
+import dayjs from 'dayjs'
 
 const props = defineProps<{
   id: string | undefined
