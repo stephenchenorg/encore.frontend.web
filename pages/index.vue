@@ -63,15 +63,45 @@
         </div>
 
         <div id="aside" class="md:order-3">
-          <div id="aside-inner" class="md:pb-4">
-            <button
-              v-for="event in events.data"
-              :key="event.eventId"
-              type="button"
-              @click="openActivityModal(event.eventId)"
+          <div id="aside-inner">
+            <div
+              v-if="events.data && events.data.length"
+              class="md:hidden"
             >
-              <img class="rounded-lg" :src="event.image">
-            </button>
+              <div ref="swiperEl" class="swiper">
+                <div class="swiper-wrapper">
+                  <div
+                    v-for="event in events.data"
+                    :key="event.eventId"
+                    class="swiper-slide"
+                  >
+                    <button
+                      type="button"
+                      class="block w-full h-full"
+                      @click="openActivityModal(event.eventId)"
+                    >
+                      <img
+                        class="w-full h-full aspect-[2/1] rounded-lg object-cover"
+                        :src="event.image"
+                      >
+                    </button>
+                  </div>
+                </div>
+                <div class="swiper-pagination" />
+              </div>
+            </div>
+
+            <div class="hidden md:block md:space-y-2 md:pb-4">
+              <button
+                v-for="event in events.data"
+                :key="event.eventId"
+                type="button"
+                class="block w-full"
+                @click="openActivityModal(event.eventId)"
+              >
+                <img class="w-full h-full aspect-[2/1] rounded-lg object-cover" :src="event.image">
+              </button>
+            </div>
           </div>
         </div>
 
@@ -216,11 +246,20 @@
 </template>
 
 <script setup lang="ts">
+import Swiper from 'swiper'
+import { Autoplay, Pagination } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/pagination'
+
 const route = useRoute()
 const router = useRouter()
 
 const showCategoriesMenu = ref(false)
 const selectedCategory = ref(route.query.category as string || 'all')
+
+const swiperEl = ref<HTMLDivElement | null>(null)
+
+let swiper: Swiper | null = null
 
 const posts = usePostsStore()
 await posts.fetch({
@@ -295,6 +334,16 @@ function selectCategory(category: string) {
   })
 }
 
+function openPostModal(id: string) {
+  postId.value = id
+  showPostModal.value = true
+}
+
+function openActivityModal(id: string) {
+  activityId.value = id
+  showActivityModal.value = true
+}
+
 watch(() => route.fullPath, async () => {
   selectedCategory.value = route.query.category as string || 'all'
   showCategoriesMenu.value = false
@@ -308,13 +357,26 @@ watch(() => route.fullPath, async () => {
   window.scrollTo(0, 0)
 })
 
-function openPostModal(id: string) {
-  postId.value = id
-  showPostModal.value = true
-}
+onMounted(() => {
+  if (swiperEl.value) {
+    swiper = new Swiper(swiperEl.value, {
+      modules: [Autoplay, Pagination],
+      autoplay: {
+        delay: 3000,
+      },
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    })
+  }
+})
 
-function openActivityModal(id: string) {
-  activityId.value = id
-  showActivityModal.value = true
-}
+onBeforeUnmount(() => {
+  if (swiper) {
+    swiper.destroy()
+    swiper = null
+  }
+})
 </script>

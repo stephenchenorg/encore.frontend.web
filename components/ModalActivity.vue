@@ -38,7 +38,7 @@
             <div class="mt-2 md:grow md:min-h-0 md:overflow-y-auto">
               <div
                 v-if="event.data.image"
-                class="mb-5 relative"
+                class="mb-5"
               >
                 <div ref="swiperEl" class="swiper">
                   <div class="swiper-wrapper">
@@ -51,8 +51,8 @@
                       >
                     </div>
                   </div>
+                  <div class="swiper-pagination" />
                 </div>
-                <div class="swiper-pagination" />
               </div>
 
               <!-- <div class="mt-8 mb-[25px] text-neutral-400 font-normal">
@@ -197,6 +197,7 @@ watch(show, async (_value, _oldValue, onCleanup) => {
         modules: [Pagination],
         pagination: {
           el: '.swiper-pagination',
+          clickable: true,
         },
       })
 

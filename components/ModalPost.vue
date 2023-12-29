@@ -46,7 +46,7 @@
             <div class="mt-2 md:grow md:min-h-0 md:overflow-y-auto">
               <div
                 v-if="post.data.photos && post.data.photos.length"
-                class="mb-5 relative"
+                class="mb-5"
               >
                 <div ref="swiperEl" class="swiper">
                   <div class="swiper-wrapper">
@@ -61,8 +61,8 @@
                       >
                     </div>
                   </div>
+                  <div class="swiper-pagination" />
                 </div>
-                <div class="swiper-pagination" />
               </div>
 
               <div
@@ -171,6 +171,7 @@ watch(show, async (_value, _oldValue, onCleanup) => {
         modules: [Pagination],
         pagination: {
           el: '.swiper-pagination',
+          clickable: true,
         },
       })
 
