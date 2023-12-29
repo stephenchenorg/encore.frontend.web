@@ -40,19 +40,10 @@
                 v-if="event.data.image"
                 class="mb-5"
               >
-                <div ref="swiperEl" class="swiper">
-                  <div class="swiper-wrapper">
-                    <div
-                      class="swiper-slide"
-                    >
-                      <img
-                        class="w-full aspect-[2/1] rounded-lg object-cover"
-                        :src="event.data.image"
-                      >
-                    </div>
-                  </div>
-                  <div class="swiper-pagination" />
-                </div>
+                <img
+                  class="event-image w-full aspect-[2/1] rounded-lg object-cover"
+                  :src="event.data.image"
+                >
               </div>
 
               <!-- <div class="mt-8 mb-[25px] text-neutral-400 font-normal">
@@ -152,11 +143,7 @@
 </template>
 
 <script setup lang="ts">
-import Swiper from 'swiper'
-import { Pagination } from 'swiper/modules'
 import mediumZoom, { type Zoom } from 'medium-zoom'
-import 'swiper/css'
-import 'swiper/css/pagination'
 import dayjs from 'dayjs'
 
 const props = defineProps<{
@@ -167,10 +154,8 @@ const event = useEventStore()
 
 const show = defineModel<boolean>({ required: true })
 
-let swiper: Swiper | null = null
 let zoom: Zoom | null = null
 
-const swiperEl = ref<HTMLDivElement | null>(null)
 const loading = ref(false)
 
 watch(show, async (_value, _oldValue, onCleanup) => {
@@ -192,29 +177,14 @@ watch(show, async (_value, _oldValue, onCleanup) => {
 
     await nextTick()
 
-    if (swiperEl.value) {
-      swiper = new Swiper(swiperEl.value, {
-        modules: [Pagination],
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-      })
-
-      zoom = mediumZoom('.swiper-slide img', {
-        background: 'rgba(0, 0, 0, 0.8)',
-      })
-    }
+    zoom = mediumZoom('.event-image', {
+      background: 'rgba(0, 0, 0, 0.8)',
+    })
 
     onCleanup(() => {
       if (zoom) {
         zoom.detach()
         zoom = null
-      }
-
-      if (swiper) {
-        swiper.destroy()
-        swiper = null
       }
     })
   }

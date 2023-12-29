@@ -44,26 +44,20 @@
             </div>
 
             <div class="mt-2 md:grow md:min-h-0 md:overflow-y-auto">
-              <div
+              <Swiper
                 v-if="post.data.photos && post.data.photos.length"
+                :enabled="show"
+                :items="post.data.photos"
+                :key-resolver="photo => photo"
                 class="mb-5"
               >
-                <div ref="swiperEl" class="swiper">
-                  <div class="swiper-wrapper">
-                    <div
-                      v-for="photo in post.data.photos"
-                      :key="photo"
-                      class="swiper-slide"
-                    >
-                      <img
-                        class="w-full aspect-[2/1] rounded-lg object-cover"
-                        :src="photo"
-                      >
-                    </div>
-                  </div>
-                  <div class="swiper-pagination" />
-                </div>
-              </div>
+                <template #slide="{ item: photo }">
+                  <img
+                    class="w-full aspect-[2/1] rounded-lg object-cover"
+                    :src="photo"
+                  >
+                </template>
+              </Swiper>
 
               <div
                 v-if="post.data.content"
@@ -127,11 +121,7 @@
 
 <script setup lang="ts">
 import dayjs from 'dayjs'
-import Swiper from 'swiper'
-import { Pagination } from 'swiper/modules'
 import mediumZoom, { type Zoom } from 'medium-zoom'
-import 'swiper/css'
-import 'swiper/css/pagination'
 
 const props = defineProps<{
   id: string | undefined
@@ -141,10 +131,8 @@ const post = usePostStore()
 
 const show = defineModel<boolean>({ required: true })
 
-let swiper: Swiper | null = null
 let zoom: Zoom | null = null
 
-const swiperEl = ref<HTMLDivElement | null>(null)
 const loading = ref(false)
 
 watch(show, async (_value, _oldValue, onCleanup) => {
@@ -166,29 +154,14 @@ watch(show, async (_value, _oldValue, onCleanup) => {
 
     await nextTick()
 
-    if (swiperEl.value) {
-      swiper = new Swiper(swiperEl.value, {
-        modules: [Pagination],
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-      })
-
-      zoom = mediumZoom('.swiper-slide img', {
-        background: 'rgba(0, 0, 0, 0.8)',
-      })
-    }
+    zoom = mediumZoom('.swiper-slide img', {
+      background: 'rgba(0, 0, 0, 0.8)',
+    })
 
     onCleanup(() => {
       if (zoom) {
         zoom.detach()
         zoom = null
-      }
-
-      if (swiper) {
-        swiper.destroy()
-        swiper = null
       }
     })
   }
