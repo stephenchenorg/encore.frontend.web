@@ -2,11 +2,11 @@
   <div ref="el" class="swiper">
     <div class="swiper-wrapper">
       <div
-        v-for="item in items"
+        v-for="(item, index) in items"
         :key="keyResolver(item)"
         class="swiper-slide"
       >
-        <slot name="slide" :item="item" />
+        <slot name="slide" :item="item" :index="index" />
       </div>
     </div>
     <div class="swiper-pagination" />
@@ -19,10 +19,13 @@ import { Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-const props = defineProps<{
-  enabled: boolean
+defineProps<{
   items: T[]
   keyResolver: (item: T) => string
+}>()
+
+const emit = defineEmits<{
+  change: [number]
 }>()
 
 let swiper: Swiper | null = null
@@ -30,15 +33,17 @@ let swiper: Swiper | null = null
 const el = ref<HTMLDivElement | null>(null)
 
 onMounted(() => {
-  if (props.enabled) {
-    swiper = new Swiper(el.value!, {
-      modules: [Pagination],
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-    })
-  }
+  swiper = new Swiper(el.value!, {
+    modules: [Pagination],
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  })
+
+  swiper.on('slideChange', swiper => {
+    emit('change', swiper.activeIndex)
+  })
 })
 
 onBeforeUnmount(() => {

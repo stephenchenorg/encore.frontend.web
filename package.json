@@ -14,7 +14,6 @@
     "dayjs": "^1.11.10",
     "grapheme-splitter": "^1.0.4",
     "hc-sticky": "^2.2.7",
-    "medium-zoom": "^1.1.0",
     "swiper": "^11.0.5",
     "vue": "^3.4.0",
     "vue-router": "^4.2.5"

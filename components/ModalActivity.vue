@@ -36,15 +36,17 @@
             </div>
 
             <div class="mt-2 md:grow md:min-h-0 md:overflow-y-auto">
-              <div
+              <button
                 v-if="event.data.image"
-                class="mb-5"
+                type="button"
+                class="w-full mb-5"
+                @click="showGallery = true"
               >
                 <img
-                  class="event-image w-full aspect-[2/1] rounded-lg object-cover"
+                  class="w-full aspect-[2/1] rounded-lg object-cover"
                   :src="event.data.image"
                 >
-              </div>
+              </button>
 
               <!-- <div class="mt-8 mb-[25px] text-neutral-400 font-normal">
                 {{ dayjs(post.data.createdAt).format('MM 月 DD 日 HH:mm') }}
@@ -140,10 +142,15 @@
   </div>
 
   <Overlay v-model="show" :z-index="40" overlay-class="hidden md:block" />
+
+  <SwiperGallery
+    v-if="showGallery && event.data?.image"
+    :photos="[event.data.image]"
+    @close="showGallery = false"
+  />
 </template>
 
 <script setup lang="ts">
-import mediumZoom, { type Zoom } from 'medium-zoom'
 import dayjs from 'dayjs'
 
 const props = defineProps<{
@@ -154,11 +161,15 @@ const event = useEventStore()
 
 const show = defineModel<boolean>({ required: true })
 
-let zoom: Zoom | null = null
+const showGallery = ref(false)
 
 const loading = ref(false)
 
-watch(show, async (_value, _oldValue, onCleanup) => {
+function close() {
+  show.value = false
+}
+
+watch(show, async () => {
   if (show.value) {
     document.body.classList.add('overlay-show-post-modal')
   } else {
@@ -174,23 +185,6 @@ watch(show, async (_value, _oldValue, onCleanup) => {
       throw error
     }
     loading.value = false
-
-    await nextTick()
-
-    zoom = mediumZoom('.event-image', {
-      background: 'rgba(0, 0, 0, 0.8)',
-    })
-
-    onCleanup(() => {
-      if (zoom) {
-        zoom.detach()
-        zoom = null
-      }
-    })
   }
 })
-
-function close() {
-  show.value = false
-}
 </script>

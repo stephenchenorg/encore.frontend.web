@@ -46,15 +46,15 @@
             <div class="mt-2 md:grow md:min-h-0 md:overflow-y-auto">
               <Swiper
                 v-if="post.data.photos && post.data.photos.length"
-                :enabled="show"
                 :items="post.data.photos"
                 :key-resolver="photo => photo"
                 class="mb-5"
               >
-                <template #slide="{ item: photo }">
+                <template #slide="{ item: photo, index }">
                   <img
                     class="w-full aspect-[2/1] rounded-lg object-cover"
                     :src="photo"
+                    @click="openGallery(index)"
                   >
                 </template>
               </Swiper>
@@ -117,11 +117,17 @@
   </div>
 
   <Overlay v-model="show" :z-index="40" overlay-class="hidden md:block" />
+
+  <SwiperGallery
+    v-if="showGallery && post.data?.photos?.length"
+    :photos="post.data.photos"
+    :start-photo-index="galleryPhotoIndex"
+    @close="showGallery = false"
+  />
 </template>
 
 <script setup lang="ts">
 import dayjs from 'dayjs'
-import mediumZoom, { type Zoom } from 'medium-zoom'
 
 const props = defineProps<{
   id: string | undefined
@@ -131,11 +137,21 @@ const post = usePostStore()
 
 const show = defineModel<boolean>({ required: true })
 
-let zoom: Zoom | null = null
+const showGallery = ref(false)
+const galleryPhotoIndex = ref(0)
 
 const loading = ref(false)
 
-watch(show, async (_value, _oldValue, onCleanup) => {
+function close() {
+  show.value = false
+}
+
+function openGallery(index: number) {
+  showGallery.value = true
+  galleryPhotoIndex.value = index
+}
+
+watch(show, async () => {
   if (show.value) {
     document.body.classList.add('overlay-show-post-modal')
   } else {
@@ -151,23 +167,6 @@ watch(show, async (_value, _oldValue, onCleanup) => {
       throw error
     }
     loading.value = false
-
-    await nextTick()
-
-    zoom = mediumZoom('.swiper-slide img', {
-      background: 'rgba(0, 0, 0, 0.8)',
-    })
-
-    onCleanup(() => {
-      if (zoom) {
-        zoom.detach()
-        zoom = null
-      }
-    })
   }
 })
-
-function close() {
-  show.value = false
-}
 </script>
