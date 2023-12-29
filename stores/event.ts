@@ -7,7 +7,7 @@ export const useEventsStore = defineStore('activities', () => {
 
   async function fetch() {
 
-    const apiPath = `/public/eventContents?page=1`
+    const apiPath = `/public/eventContents?page=1&limit=3`
 
     const { data: res } = await useApiFetch<ApiResponse<Event[]>>(apiPath, {
       method: 'GET',
