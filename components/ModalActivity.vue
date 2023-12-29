@@ -73,7 +73,7 @@
               <div class="flex-1 md:flex-none inline-flex items-center gap-2 my-1 w-full">
                 <img class="w-[18px] h-[18px] relative" src="~/assets/images/dollar.svg">
                 <div class="text-neutral-400 font-normal text-[17px]/[31px]">
-                  {{ event.data.isFree ? '免費' : '收費' }}
+                  {{ event.data.price ? `${event.data.price} 元` : '免費' }}
                 </div>
               </div>
 

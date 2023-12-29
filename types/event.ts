@@ -17,6 +17,7 @@ export interface Event {
   isFree: boolean
   isOnline: boolean
   image: string
+  price?: number
   participants?: number
   createdAt: string
 }
