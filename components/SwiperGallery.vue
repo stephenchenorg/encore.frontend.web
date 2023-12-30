@@ -1,20 +1,27 @@
 <template>
   <div ref="el" class="fixed inset-0 z-50 bg-black/70">
-    <div ref="swiperEl" class="swiper max-h-full">
+    <div ref="swiperEl" class="swiper h-full">
       <div class="swiper-wrapper">
         <div
           v-for="photo in photos"
           :key="photo"
-          class="swiper-slide"
+          class="swiper-slide relative h-full"
         >
-          <div class="relative">
-            <div class="absolute inset-0" @click="$emit('close')" />
-            <img class="relative swiperg-gallery-image mx-auto" :src="photo">
+          <div class="absolute inset-0" @click="$emit('close')" />
+          <div class="relative h-full flex justify-center items-center">
+            <img class="swiperg-gallery-image relative" :src="photo">
           </div>
         </div>
       </div>
       <div class="swiper-pagination" />
     </div>
+
+    <button type="button" class="absolute top-4 right-4 z-[1]" @click="$emit('close')">
+      <img
+        src="~/assets/images/icon-close-light.svg"
+        class="w-10 h-10 shrink-0"
+      >
+    </button>
   </div>
 </template>
 
