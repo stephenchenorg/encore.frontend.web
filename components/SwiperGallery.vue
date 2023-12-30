@@ -15,6 +15,13 @@
       </div>
       <div class="swiper-pagination" />
     </div>
+
+    <button type="button" class="absolute top-4 right-4 z-[1]" @click="$emit('close')">
+      <img
+        src="~/assets/images/icon-close.svg"
+        class="w-10 h-10 shrink-0"
+      >
+    </button>
   </div>
 </template>
 
