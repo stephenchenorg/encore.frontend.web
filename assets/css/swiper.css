@@ -1,5 +1,7 @@
 :root {
-  --swiper-theme-color: #ef4444 !important;
+  --swiper-theme-color: #F1435A !important;
+  --swiper-pagination-bullet-inactive-color: #E1E1E1 !important;
+  --swiper-pagination-bullet-inactive-opacity: 1 !important;
 }
 
 .swiper-slide img {
@@ -7,5 +9,9 @@
 }
 
 .swiper-pagination-bullet {
-  @apply ring-2 ring-white;
+  @apply w-[7px] h-[7px] rounded-[3.5px] transition-[background,width] !important;
+}
+
+.swiper-pagination-bullet-active {
+  @apply w-[24px] !important;
 }

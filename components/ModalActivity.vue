@@ -36,24 +36,17 @@
             </div>
 
             <div class="mt-2 md:grow md:min-h-0 md:overflow-y-auto">
-              <div
+              <button
                 v-if="event.data.image"
-                class="mb-5 relative"
+                type="button"
+                class="w-full mb-5"
+                @click="showGallery = true"
               >
-                <div ref="swiperEl" class="swiper">
-                  <div class="swiper-wrapper">
-                    <div
-                      class="swiper-slide"
-                    >
-                      <img
-                        class="w-full aspect-[2/1] rounded-lg object-cover"
-                        :src="event.data.image"
-                      >
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-pagination" />
-              </div>
+                <img
+                  class="w-full aspect-[2/1] rounded-lg object-cover"
+                  :src="event.data.image"
+                >
+              </button>
 
               <!-- <div class="mt-8 mb-[25px] text-neutral-400 font-normal">
                 {{ dayjs(post.data.createdAt).format('MM 月 DD 日 HH:mm') }}
@@ -66,7 +59,7 @@
               <div class="flex-1 md:flex-none inline-flex items-center gap-2 my-1 w-full">
                 <img class="w-[18px] h-[18px] relative" src="~/assets/images/calendar-three.svg">
                 <div class="text-neutral-400 font-normal text-[17px]/[31px]">
-                  {{ dayjs(event.data.startDate).format('YYYY年MM月DD日') }} {{ event.data.startTime }} - {{ dayjs(event.data.endData).format('YYYY年MM月DD日') }} {{ event.data.endTime }}
+                  {{ dayjs(event.data.startDate).format('YYYY年MM月DD日') }} {{ event.data.startTime }} - {{ dayjs(event.data.endDate).format('YYYY年MM月DD日') }} {{ event.data.endTime }}
                 </div>
               </div>
 
@@ -80,14 +73,14 @@
               <div class="flex-1 md:flex-none inline-flex items-center gap-2 my-1 w-full">
                 <img class="w-[18px] h-[18px] relative" src="~/assets/images/dollar.svg">
                 <div class="text-neutral-400 font-normal text-[17px]/[31px]">
-                  {{ event.data.isFree ? '免費' : '收費' }}
+                  {{ event.data.price ? `${event.data.price} 元` : '免費' }}
                 </div>
               </div>
 
               <div class="flex-1 md:flex-none inline-flex items-center gap-2 my-1 w-full">
                 <img class="w-[18px] h-[18px] relative" src="~/assets/images/peoples.svg">
                 <div class="text-neutral-400 font-normal text-[17px]/[31px]">
-                  已經有 {{ event.participants ?? 0 }} 個人報名
+                  已經有 {{ event.data.participants ?? 0 }} 個人報名
                 </div>
               </div>
 
@@ -149,15 +142,16 @@
   </div>
 
   <Overlay v-model="show" :z-index="40" overlay-class="hidden md:block" />
+
+  <SwiperGallery
+    v-if="showGallery && event.data?.image"
+    :photos="[event.data.image]"
+    @close="showGallery = false"
+  />
 </template>
 
 <script setup lang="ts">
-import Swiper from 'swiper'
-import { Pagination } from 'swiper/modules'
-import mediumZoom, { type Zoom } from 'medium-zoom'
-import 'swiper/css'
-import 'swiper/css/pagination'
-import dayjs from "dayjs";
+import dayjs from 'dayjs'
 
 const props = defineProps<{
   id: string | undefined
@@ -167,13 +161,15 @@ const event = useEventStore()
 
 const show = defineModel<boolean>({ required: true })
 
-let swiper: Swiper | null = null
-let zoom: Zoom | null = null
+const showGallery = ref(false)
 
-const swiperEl = ref<HTMLDivElement | null>(null)
 const loading = ref(false)
 
-watch(show, async (_value, _oldValue, onCleanup) => {
+function close() {
+  show.value = false
+}
+
+watch(show, async () => {
   if (show.value) {
     document.body.classList.add('overlay-show-post-modal')
   } else {
@@ -189,37 +185,6 @@ watch(show, async (_value, _oldValue, onCleanup) => {
       throw error
     }
     loading.value = false
-
-    await nextTick()
-
-    if (swiperEl.value) {
-      swiper = new Swiper(swiperEl.value, {
-        modules: [Pagination],
-        pagination: {
-          el: '.swiper-pagination',
-        },
-      })
-
-      zoom = mediumZoom('.swiper-slide img', {
-        background: 'rgba(0, 0, 0, 0.8)',
-      })
-    }
-
-    onCleanup(() => {
-      if (zoom) {
-        zoom.detach()
-        zoom = null
-      }
-
-      if (swiper) {
-        swiper.destroy()
-        swiper = null
-      }
-    })
   }
 })
-
-function close() {
-  show.value = false
-}
 </script>
