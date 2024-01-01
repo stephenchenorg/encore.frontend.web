@@ -80,7 +80,7 @@
               <div class="flex-1 md:flex-none inline-flex items-center gap-2 my-1 w-full">
                 <img class="w-[18px] h-[18px] relative" src="~/assets/images/peoples.svg">
                 <div class="text-neutral-400 font-normal text-[17px]/[31px]">
-                  已經有 {{ event.data.participants ?? 0 }} 個人報名
+                  已經有 {{ event.data.enrolledCount ?? 0 }} 個人報名
                 </div>
               </div>
 

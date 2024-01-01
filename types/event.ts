@@ -18,6 +18,6 @@ export interface Event {
   isOnline: boolean
   image: string
   price?: number
-  participants?: number
+  enrolledCount?: number
   createdAt: string
 }
