@@ -57,8 +57,9 @@ server {
   #
   listen 443 ssl ;
   listen [::]:443 ssl ;
-  server_name staging.encoredays.com;
 
+  # Replace with your domain name
+  server_name <domain name>;
 
   ssl_certificate /etc/nginx/ssl/cf.pem; # managed by Certbot
   ssl_certificate_key /etc/nginx/ssl/cf.key; # managed by Certbot
