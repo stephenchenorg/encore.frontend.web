@@ -51,35 +51,37 @@ According to **staging server** has nginx build-in, you will need to create a ne
 use redirect to docker container, example below:
 
 ```bash
-server{
-	listen 80 ;
-	listen [::]:80 ;
 
-	# SSL configuration
-	#
-	listen 443 ssl ;
-	listen [::]:443 ssl ;
-	server_name staging.encoredays.com;
+server {
+
+  listen 80 ;
+  listen [::]:80 ;
+
+  # SSL configuration
+  #
+  listen 443 ssl ;
+  listen [::]:443 ssl ;
+  server_name staging.encoredays.com;
+
 
   ssl_certificate /etc/nginx/ssl/cf.pem; # managed by Certbot
   ssl_certificate_key /etc/nginx/ssl/cf.key; # managed by Certbot
 
-	# deny access to .htaccess files, if Apache's document root
-	# concurs with nginx's one
-	#
-	location ~ /\.ht {
-		deny all;
-	}
+  # deny access to .htaccess files, if Apache's document root
+  # concurs with nginx's one
+  #
+  location ~ /\.ht {
+    deny all;
+  }
 
   # Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.
   location / {
-      proxy_pass http://localhost:3000;
-      proxy_set_header Host $host;
-      proxy_set_header X-Real-IP $remote_addr;
-      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-      proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_pass http://localhost:3000;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
   }
-
 }
 ```
 
